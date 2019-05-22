@@ -1,4 +1,5 @@
 *.min.*
 src/lib/markbind/src/lib/markdown-it/*
+**/node_modules/*
 
 !.eslintrc.js
