@@ -43,7 +43,7 @@
             refid += `:${tokens[idx].meta.subId}`;
           }
 
-          return `<trigger for="pop:footnote${id}" keeporiginalstyle><sup class="footnote-ref"><a aria-describedby="footnote-label" href="#footnote${id}" id="footnoteref${refid}">${caption}</a></sup></trigger>`;
+          return `<trigger for="pop:footnote${id}"><sup class="footnote-ref"><a aria-describedby="footnote-label" href="#footnote${id}" id="footnoteref${refid}">${caption}</a></sup></trigger>`;
         }
 
         function render_footnote_block_open(tokens, idx, options) {
