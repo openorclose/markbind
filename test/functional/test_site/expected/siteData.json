@@ -112,8 +112,7 @@
         "unexpanded-panel": "Unexpanded panel",
         "test-plugin-in-markbind-plugins": "Test plugin in markbind/plugins",
         "markbind-plugin-pre-render": "Markbind Plugin Pre-render",
-        "test-search-indexing": "Test search indexing",
-        "level-6-header-outside-headingsearchindex-with-always-index-attribute-should-be-indexed": "Level 6 header (outside headingSearchIndex) with always-index attribute should be indexed"
+        "test-footnotes": "Test footnotes"
       },
       "title": "Hello World",
       "header": "header.md",

@@ -236,6 +236,10 @@ tags: ["tag-frontmatter-shown", "tag-included-file", "+tag-exp*", "-tag-exp-hidd
   Markbind Plugin Pre-render Placeholder
 </div>
 
+# Test footnotes
+
+<include src="testFootnotes.md />
+
 # Test search indexing
 
 ## Level 2 header (inside headingSearchIndex) with no-index attribute should not be indexed {.no-index}
