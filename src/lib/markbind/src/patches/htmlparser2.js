@@ -149,18 +149,10 @@ Tokenizer.prototype.specialTagNames = [
  * Checks whether the token matches one of the first characters of the special tag names,
  * and initialises the _matchingSpecialTags array with objects containing information about the matches.
  */
+// const print = x => (console.log(x), x);
 Tokenizer.prototype.isFirstCharacterSpecialTagCharacter = function(c) {
-	this._matchingSpecialTags = this.specialTagNames
-		.map((str, index) => ({
-			index,
-			nextTestIndex: 0,
-		}))
-		.filter(indexObj => c.toLowerCase() === this.specialTagNames[indexObj.index][indexObj.nextTestIndex])
-		.map(indexObj => ({
-			index: indexObj.index,
-			nextTestIndex: indexObj.nextTestIndex + 1,
-			hasFinishedMatching: this.specialTagNames[indexObj.index][indexObj.nextTestIndex + 1] === undefined,
-		}));
+	this._potentialSpecialTag = c;
+	this._matchingSpecialTags = this.specialTagNames.filter(tag => tag[0] === c);
 
 	return this._matchingSpecialTags.length > 0;
 };
@@ -171,26 +163,18 @@ Tokenizer.prototype.isFirstCharacterSpecialTagCharacter = function(c) {
  * If one of the previous matches has finished matching, the corresponding matchIndex is set and returned.
  */
 Tokenizer.prototype.processSpecialFunctions = function(c) {
-	let matchIndex;
-
+	let matchedTag;
+	this._potentialSpecialTag += c;
 	this._matchingSpecialTags = this._matchingSpecialTags
-		.filter((indexObj) => {
-			if (indexObj.hasFinishedMatching) {
-				matchIndex = indexObj.index;
-
-				return c === "/" || c === ">" || whitespace(c);
+		.filter((tag) => {
+			if (this._potentialSpecialTag === tag) {
+				matchedTag = tag;
+				return true;
 			}
-
-			return c.toLowerCase() === this.specialTagNames[indexObj.index][indexObj.nextTestIndex];
-		})
-		.map(indexObj => ({
-				index: indexObj.index,
-				nextTestIndex: indexObj.nextTestIndex + 1,
-				hasFinishedMatching: this.specialTagNames[indexObj.index][indexObj.nextTestIndex + 1] === undefined,
-			}));
-
+			return tag.startsWith(this._potentialSpecialTag);
+		});
 	return {
-		matchIndex,
+		matchIndex: matchedTag && this.specialTagNames.indexOf(matchedTag),
 		hasMatching: this._matchingSpecialTags.length > 0,
 	};
 };
